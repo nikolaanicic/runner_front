@@ -1,0 +1,23 @@
+
+.card
+{
+  width:160px;
+  height: 160px;
+  text-align: center;
+}
+
+.a-card
+{
+  height:100%;
+  width:100%;
+  padding:0;
+  margin:0;
+  text-decoration: none;
+}
+
+
+
+.border :hover
+{
+  opacity:0.5;
+}

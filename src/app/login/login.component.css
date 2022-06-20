@@ -1,14 +1,4 @@
-@font-face {
-  font-family: dancing-script;
-  src:local("dancing-script"), url("~/assets/fonts/dancing_script/static/DancingScript-Regular.ttf") format("truetype");
-}
 
-
-.dancing-font
-{
-  font-family: dancing-script;
-  font-size:3em;
-}
 
 .whole-div-img {
   background-size: cover;
