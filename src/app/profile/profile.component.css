@@ -1,0 +1,12 @@
+
+
+.profile-img-container{
+  width: 200px;
+  height: 200px;
+}
+
+label:hover
+{
+  opacity: 0.7;
+}
+
