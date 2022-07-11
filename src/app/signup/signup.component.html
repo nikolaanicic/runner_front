@@ -1,40 +1,205 @@
-<div class="d-flex flex-row" style="max-width: 100%;max-height: 100%;overflow-y: hidden">
+<div class="d-flex flex-row" style="max-width: 100%">
   <div class="col w-25">
-    <img src="assets/images/signup.jpg" style="height: 100vh;"/>
+    <img src="assets/images/signup.jpg" style="height: 100vh" />
   </div>
-  <div class="w-25 bg-white text-black p-3 col m-5">
-    <span class="p-1 m-1"><p class="dancing-font display-5">runner</p></span>
-    <span class="p-1"><p class="font-monospace text-black-50">Please fill out the sign up form</p></span>
+  <div class="w-25 bg-dark text-black p-3 col">
+    <span class="p-1"><p class="dancing-font display-5">runner</p></span>
 
-    <form class="w-100">
+    <form
+      class="w-100"
+      [formGroup]="signUpForm"
+      (ngSubmit)="onSubmit()"
+      enctype="multipart/form-data"
+    >
       <div class="form-group d-flex flex-column">
-        <div class="d-flex flex-row">
-          <input class="border bg-white text-warning m-2 p-2" placeholder="Username" type="text"/>
-          <input class="border bg-white text-warning m-2 p-2" placeholder="Password" type="password"/>
+        <div class="d-flex flex-row mb-2">
+          <div class="d-flex flex-column text-center mx-2">
+            <input
+              class="border-secondary bg-dark text-warning p-2"
+              placeholder="Username"
+              formControlName="username"
+              type="text"
+            />
+            <span *ngIf="signUpForm.controls.username.touched">
+              <small
+                *ngIf="signUpForm.controls.username.errors?.required"
+                class="text-danger"
+                >* Username is required</small
+              >
+              <small
+                *ngIf="signUpForm.controls.username.errors?.maxlength"
+                class="text-danger"
+                >Max length is 50</small
+              >
+            </span>
+          </div>
+          <div class="d-flex flex-column text-center mx-2">
+            <input
+              class="border-secondary bg-dark text-warning p-2"
+              placeholder="Password"
+              type="password"
+              formControlName="password"
+            />
+            <span *ngIf="signUpForm.controls.password.touched">
+              <small
+                *ngIf="signUpForm.controls.password.errors?.required"
+                class="text-danger"
+                >* Password is required</small
+              >
+              <small
+                *ngIf="signUpForm.controls.password.errors?.minlength"
+                class="text-danger"
+                >Min length is 5</small
+              >
+              <small
+                *ngIf="signUpForm.controls.password.errors?.maxlength"
+                class="text-danger"
+                >Max length is 20</small
+              >
+              <small
+                *ngIf="
+                  signUpForm.controls.password.errors?.password &&
+                  !signUpForm.controls.password.errors?.required &&
+                  !signUpForm.controls.password.errors?.maxlength &&
+                  !signUpForm.controls.password.errors?.minlength
+                "
+                class="text-danger"
+                >Must have at least one digit</small
+              >
+            </span>
+          </div>
         </div>
-        <div class="d-flex flex-row">
-          <input class="border bg-white text-warning m-2 p-2" placeholder="Email" type="email"/>
-          <input class="border bg-white text-warning m-2 p-2" placeholder="Birthdate" type="date"/>
+        <div class="d-flex flex-row my-2">
+          <div class="d-flex flex-column text-center mx-2">
+            <input
+              class="border-secondary bg-dark text-warning p-2"
+              placeholder="Email"
+              type="email"
+              formControlName="email"
+            />
+            <span *ngIf="signUpForm.controls.email.touched">
+              <small
+                *ngIf="signUpForm.controls.email.errors?.required"
+                class="text-danger"
+                >Must be an email</small
+              >
+            </span>
+          </div>
+          <div class="d-flex flex-column text-center mx-2">
+            <input
+              class="border-secondary bg-dark text-warning p-2"
+              placeholder="Birthdate"
+              type="date"
+              formControlName="dateOfBirth"
+            />
+            <span *ngIf="signUpForm.controls.dateOfBirth.touched">
+              <small
+                *ngIf="signUpForm.controls.dateOfBirth.errors?.required"
+                class="text-danger"
+                >Date of birth is required</small
+              >
+            </span>
+          </div>
         </div>
-        <div class="d-flex flex-row">
-          <input class="border bg-white text-warning m-2 p-2" placeholder="Name" type="text"/>
-          <input class="border bg-white text-warning m-2 p-2" placeholder="Last Name" type="text"/>
+        <div class="d-flex flex-row my-2">
+          <div class="d-flex flex-column text-center mx-2">
+            <input
+              class="border-secondary bg-dark text-warning p-2"
+              placeholder="Name"
+              type="text"
+              formControlName="name"
+            />
+            <span *ngIf="signUpForm.controls.name.touched">
+              <small
+                *ngIf="signUpForm.controls.name.errors?.required"
+                class="text-danger"
+                >Name is required</small
+              >
+            </span>
+          </div>
+          <div class="d-flex flex-column text-center mx-2">
+            <input
+              class="border-secondary bg-dark text-warning p-2"
+              placeholder="Last Name"
+              type="text"
+              formControlName="lastName"
+            />
+            <span *ngIf="signUpForm.controls.lastName.touched">
+              <small
+                *ngIf="signUpForm.controls.lastName.errors?.required"
+                class="text-danger"
+                >Last name is required</small
+              >
+            </span>
+          </div>
         </div>
+        <div class="d-flex flex-row my-2">
+          <div class="d-flex flex-column text-center mx-2">
+            <input
+              class="border-secondary bg-dark text-warning p-2"
+              placeholder="Address"
+              type="text"
+              formControlName="address"
+            />
+            <span *ngIf="signUpForm.controls.address.touched">
+              <small
+                *ngIf="signUpForm.controls.address.errors?.required"
+                class="text-danger"
+                >Address is required</small
+              >
+            </span>
+          </div>
+          <div class="d-flex flex-column text-center mx-2">
+            <select
+              class="border-secondary bg-dark text-warning p-2"
+              formControlName="roleName"
+            >
+              <option value="Consumer">Consumer</option>
+              <option value="Deliverer">Deliverer</option>
+            </select>
+            <span *ngIf="signUpForm.controls.roleName.touched">
+              <small
+                *ngIf="signUpForm.controls.roleName.errors?.required"
+                class="text-danger"
+                >Role is required</small
+              >
+            </span>
+          </div>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <input
+            class="border-secondary bg-dark text-warning p-2 w-50"
+            placeholder="Profile image"
+            type="file"
+            accept="image/jpeg,image/jpg"
+            (change)="onFileChange($event)"
+            [hidden]="true"
+            #file
+          />
+          <button
+            class="btn btn-success w-50 m-2 p-2"
+            (click)="file.click()"
+            type="button"
+          >
+            Profile image
+          </button>
+        </div>
+
         <div>
-          <input class="border bg-white text-warning m-2 p-2" placeholder="Address" type="text"/>
-          <select class="border bg-white text-warning m-2 p-2">
-            <option value="1">Consumer</option>
-            <option value="2">Deliverer</option>
-          </select>
+          <button
+            class="btn btn-danger m-2 p-2 w-25"
+            [disabled]="signUpForm.invalid"
+          >
+            Sign Up
+          </button>
         </div>
-        <input class="border bg-white text-warning m-2 p-2 w-50" placeholder="Profile image" type="file" accept="image/jpeg,image/jpg"/>
-        <div>
-          <button class="btn btn-danger m-2 p-2 w-25"><span class="text-white">Sign Up</span></button>
-        </div>
-        <span class="text-black-50">Already have an account? <a role="button" routerLink="/login"><span class="text-warning">Log In</span></a></span>
+        <span class="text-secondary"
+          >Already have an account?
+          <a role="button" routerLink="/login"
+            ><span class="text-warning">Log In</span></a
+          ></span
+        >
       </div>
     </form>
   </div>
-
-
 </div>

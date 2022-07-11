@@ -1,9 +1,69 @@
+<div class="bg-dark font-monospace text-success">
   <div class="d-flex flex-row justify-content-between align-items-center">
-    <div role="button" style="height: 60px;width: 60px" class="text-center">
-      <button class="btn btn-secondary m-2" (click)="open()"><span class="text-success h2 p-1">&#8801;</span> </button>
-    </div>
-    <div class="text-center m-2 p-2">
-      <button class="btn btn-danger m-1">Log out</button>
+    <div role="button" style="height: 60px; width: 60px" class="text-center">
+      <button
+        class="btn btn-secondary m-2 bg-dark"
+        (click)="openNav()"
+        [disabled]="getTimeLeft() > 0"
+      >
+        <span class="text-success h2 p-1">&#8801;</span>
+      </button>
     </div>
   </div>
-  <hr/>
+</div>
+<div id="mySidenav" class="sidenav font-monospace text-success bg-dark">
+  <a class="closebtn text-success" role="button" (click)="closeNav()"
+    >&times;</a
+  >
+  <div>
+    <a (click)="Navigate('profile')" role="button" class="text-success"
+      >Profile</a
+    >
+  </div>
+  <div *ngIf="getRole() === 'Consumer'">
+    <a href="#" class="text-success">New / Current order</a>
+  </div>
+  <div *ngIf="getRole() === 'Consumer'">
+    <a (click)="Navigate('history')" role="button" class="text-success"
+      >Order history</a
+    >
+  </div>
+  <div *ngIf="getRole() === 'Deliverer'">
+    <a (click)="Navigate('currentOrder')" role="button" class="text-success"
+      >Current order</a
+    >
+  </div>
+  <div *ngIf="getRole() === 'Deliverer'">
+    <a (click)="Navigate('history')" role="button" class="text-success"
+      >Delivery history</a
+    >
+  </div>
+  <div *ngIf="getRole() === 'Deliverer'">
+    <a (click)="Navigate('pendingOrders')" role="button" class="text-success"
+      >Active orders</a
+    >
+  </div>
+  <div *ngIf="getRole() === 'Admin'">
+    <a (click)="Navigate('requests')" role="button" class="text-success"
+      >Pending requests</a
+    >
+  </div>
+  <div *ngIf="getRole() === 'Admin'">
+    <a (click)="Navigate('allOrders')" role="button" class="text-success"
+      >All orders</a
+    >
+  </div>
+  <div *ngIf="getRole() === 'Admin'">
+    <a (click)="Navigate('addItem')" role="button" class="text-success"
+      >Add article</a
+    >
+  </div>
+  <div>
+    <a (click)="Navigate('dashboard')" role="button" class="text-success"
+      >Dashboard</a
+    >
+  </div>
+  <div>
+    <a (click)="logoutClicked()" role="button" class="text-success">Log Out</a>
+  </div>
+</div>

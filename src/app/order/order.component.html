@@ -1,0 +1,84 @@
+<div class="container w-50 mt-2 mb-2 border rounded font-monospace">
+  <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-row w-100">
+      <div class="m-2 w-75 d-flex flex-column">
+        <div class="m-1 w-100 d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column m-1">
+            <span class="text-secondary">Total price</span>
+            <span class="text-warning text-center"
+              >{{ order?.totalPrice }}$</span
+            >
+          </div>
+          <div class="d-flex flex-column m-1">
+            <span class="text-secondary font-monospace">Delivery address</span>
+            <span class="text-warning text-center">{{ order?.address }}</span>
+          </div>
+        </div>
+        <div class="w-100 d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column m-1">
+            <span class="text-secondary">Consumer</span>
+            <span class="text-warning text-center">{{ order?.consumer }}</span>
+          </div>
+          <div
+            class="d-flex flex-column m-1"
+            *ngIf="
+              (mode === '/history' || mode === '/allOrders') &&
+              order?.deliverer !== null
+            "
+          >
+            <span class="text-secondary font-monospace">Deliverer</span>
+            <span class="text-warning text-center">{{ order?.deliverer }}</span>
+          </div>
+        </div>
+
+        <div class="m-1 w-100 d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column m-1">
+            <span class="text-secondary">Status</span>
+            <span class="text-warning text-center">{{
+              order?.orderStatus
+            }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="m-2 p-2 w-25 d-flex flex-column align-items-around">
+        <button
+          class="btn btn-success m-2 p-2 text-center w-100"
+          (click)="onShowItemsClick()"
+        >
+          Show Items
+        </button>
+        <button
+          *ngIf="mode === '/pendingOrders'"
+          class="btn btn-warning m-2 p-2 text-center w-100"
+          (click)="acceptOrder(order!.id)"
+        >
+          Accept Order
+        </button>
+      </div>
+    </div>
+    <div class="d-flex flex-row w-100">
+      <p class="text-warning">{{ order?.comment }}</p>
+    </div>
+  </div>
+  <div [ngClass]="!isExpanded ? 'collapse' : ''" id="collapseContent">
+    <div class="card card-body bg-dark">
+      <ol>
+        <li *ngFor="let item of order?.produce">
+          <div class="d-flex flex-row">
+            <div class="d-flex flex-column m-2 p-2">
+              <span class="text-secondary">Name:</span>
+              <span class="text-secondary">Price:</span>
+              <span class="text-secondary">Details:</span>
+            </div>
+            <div class="d-flex flex-column m-2 p-2">
+              <span class="text-warning">{{ item.name }}</span>
+              <span class="text-warning">{{ item.price }}$</span>
+              <span class="text-warning">{{ item.details }}</span>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <hr />
+</div>

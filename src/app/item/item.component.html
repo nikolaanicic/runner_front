@@ -1,0 +1,22 @@
+<div
+  class="d-flex flex-column border rounded m-2 p-2 font-monospace"
+  style="width: 600px"
+>
+  <div class="d-flex flex-row justify-content-between p-1 w-100">
+    <span class="text-warning h4">{{ item?.name }}</span>
+    <span class="text-warning h5">{{ item?.price }}$</span>
+  </div>
+  <div
+    class="d-flex flex-row justify-content-start p-1 w-50"
+    id="details-{{ item?.id }}"
+  >
+    <p class="text-wrap text-truncate text-success">
+      {{ item?.details }}
+    </p>
+  </div>
+  <div class="d-flex flex-row p-1">
+    <button class="btn btn-success" type="button" (click)="onAddClick()">
+      Add to Order
+    </button>
+  </div>
+</div>

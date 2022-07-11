@@ -1,24 +1,77 @@
-<div class="d-flex flex-row no-scroll">
-  <div class="w-25 bg-white text-black p-3 m-3 col">
-    <span class="p-1"><p class="dancing-font display-3">runner</p></span>
+<div class="d-flex flex-row no-scroll font-monospace bg-dark">
+  <div class="w-25 text-black p-3 m-3 col bg-dark">
+    <span class="p-1"
+      ><p class="dancing-font display-3 bg-dark text-white">runner</p></span
+    >
 
-    <span class="m-1 p-1"><p class="font-monospace text-black h4">Welcome back</p></span>
-    <span class="m-1 p-1"><p class="font-monospace text-black-50">Log in with your username and password</p></span>
+    <span class="m-1 p-1"
+      ><p class="font-monospace text-secondary h4 bg-dark">
+        Welcome back
+      </p></span
+    >
+    <span class="m-1 p-1"
+      ><p class="font-monospace text-secondary bg-dark">
+        Log in with your username and password
+      </p></span
+    >
 
-    <form>
-      <div class="form-group">
-        <input class="border bg-white text-success m-2 p-2" placeholder="Username" type="text"/>
-        <input class="border bg-white text-success m-2 p-2" placeholder="Password" type="password"/>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group bg-dark">
+        <div>
+          <input
+            class="bg-dark border-secondary text-success m-2 p-2"
+            placeholder="Username"
+            type="text"
+            formControlName="username"
+          />
+          <small
+            *ngIf="
+              loginForm.controls.username.touched &&
+              loginForm.controls['username'].errors?.required
+            "
+            class="text-danger"
+            >* Username is required</small
+          >
+        </div>
+        <div>
+          <input
+            class="border-secondary bg-dark text-success m-2 p-2"
+            placeholder="Password"
+            type="password"
+            formControlName="password"
+          />
+          <small
+            *ngIf="
+              loginForm.controls.password.touched &&
+              loginForm.controls.password.errors?.required
+            "
+            class="text-danger"
+            >* Password is required</small
+          >
+        </div>
 
-      <div>
-        <button class="btn btn-warning m-2 p-2 w-25"><span class="text-white">Login</span></button>
-      </div>
-      <span class="m-2 p-2 font-monospace"><p class="text-black-50 h6">Don't have an account yet?<a role="button" routerLink="/signup"><span class="text-info"> Sign Up</span></a></p></span>
+        <div class="d-flex flex-column text-center">
+          <button
+            class="btn btn-warning m-2 p-2 w-25"
+            [disabled]="loginForm.invalid"
+          >
+            <span>Login</span>
+          </button>
+          <asl-google-signin-button>
+            <button>Sign in With Google</button>
+          </asl-google-signin-button>
+        </div>
+        <span class="m-2 p-2 font-monospace"
+          ><p class="text-secondary h6">
+            Don't have an account yet?<a role="button" routerLink="/signup"
+              ><span class="text-info"> Sign Up</span></a
+            >
+          </p></span
+        >
       </div>
     </form>
   </div>
   <div class="col w-25">
-    <img src="assets/images/login.jpg" class="image-100"/>
+    <img src="assets/images/login.jpg" class="image-100" />
   </div>
-
 </div>

@@ -1,0 +1,64 @@
+<div class="container w-25 mt-5 font-monospace">
+  <div class="border border-1 rounded m-2 p-2">
+    <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+      <div class="d-flex flex-column align-items-center">
+        <div class="m-2 p-2 d-flex flex-column text-center">
+          <input
+            class="border-secondary bg-dark text-warning m-2 p-2"
+            placeholder="Item name"
+            formControlName="name"
+            type="text"
+          />
+          <span *ngIf="itemForm.controls.name.touched">
+            <small
+              class="text-danger"
+              *ngIf="itemForm.controls.name.errors?.required"
+              >Name is required</small
+            >
+            <small
+              class="text-danger"
+              *ngIf="itemForm.controls.name.errors?.maxlength"
+              >Name must be shorter than 60 characters</small
+            >
+          </span>
+        </div>
+        <div class="m-2 p-2 d-flex flex-column text-center">
+          <input
+            class="border-secondary bg-dark text-warning m-2 p-2"
+            placeholder="Price (1$ - 9999$)"
+            formControlName="price"
+            type="text"
+          />
+          <span *ngIf="itemForm.controls.price.touched">
+            <small
+              class="text-danger"
+              *ngIf="
+                itemForm.controls.price.errors?.price ||
+                itemForm.controls.price.errors?.required
+              "
+              >Price should be a number less than 10000</small
+            >
+          </span>
+          <div class="mt-4 d-flex flex-column text-center">
+            <textarea
+              class="border-secondary bg-dark text-warning m-2 p-2 align-top"
+              placeholder="Details"
+              formControlName="details"
+              rows="5"
+            ></textarea>
+            <span *ngIf="itemForm.controls.details.touched">
+              <small
+                class="text-danger"
+                *ngIf="itemForm.controls.details.errors?.required"
+                >Details are required</small
+              >
+            </span>
+          </div>
+        </div>
+        <div class="m-2 p-2 d-flex justify-content-center w-75">
+          <button class="btn btn-success m-2 p-2 w-100">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

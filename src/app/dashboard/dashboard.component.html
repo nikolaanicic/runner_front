@@ -1,60 +1,108 @@
-<div class="w-100 row d-flex align-items-center font-monospace">
-    <div class="col w-50 rounded bg-white text-success text-center">
-      <span class="h4 dancing-font">Hi username</span><br/>
-      <div class="row">
-        <div role="button" class="border border-1 border-secondary rounded card m-3 p-2 shadow-lg">
-          <a class="a-card">
-            <span class="text-success h2 align-middle">Profile</span>
-          </a>
-        </div>
-        <div role="button" class="border border-1 border-secondary rounded card m-3 p-2 shadow-lg">
-          <a class="a-card">
-            <span class="text-success h2">New / Current order</span>
-          </a>
-        </div>
-        <div role="button" class="border border-1 border-secondary rounded card m-3 p-2 shadow-lg">
-          <a class="a-card">
-            <span class="text-success h2">Ordering history</span>
-          </a>
-        </div>
-        <div role="button" class="border border-1 border-secondary rounded card m-3 p-2 shadow-lg">
-          <a class="a-card">
-            <span class="text-success h2">Pending requests</span>
-          </a>
-        </div>
+<div
+  class="row d-flex align-items-center font-monospace bg-dark m-0"
+  style="max-width: 100%; height: 100%"
+>
+  <div
+    class="col w-25 text-success text-center"
+    style="z-index: 10; margin-left: 20px"
+  >
+    <div class="row">
+      <div
+        role="button"
+        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
+        (click)="onProfileClick()"
+      >
+        <a class="a-card">
+          <span class="text-success h2 align-middle">Profile</span>
+        </a>
       </div>
-      <div class="row">
-        <div role="button" class="border border-1 border-secondary rounded card m-3 p-2 shadow-lg">
-          <a class="a-card">
-            <span class="text-success h2">Pending orders</span>
-          </a>
-        </div>
-        <div role="button" class="border border-1 border-secondary rounded card m-3 p-2 shadow-lg">
-          <a class="a-card">
-            <span class="text-success h2">Delivery history</span>
-          </a>
-        </div>
-        <div role="button" class="border border-1 border-secondary rounded card m-3 p-2 shadow-lg">
-          <a class="a-card">
-            <span class="text-success h2">Current order</span>
-          </a>
-        </div>
-        <div role="button" class="border border-1 border-secondary rounded card m-3 p-2 shadow-lg">
-          <a class="a-card">
-            <span class="text-success h2">All orders</span>
-          </a>
-        </div>
+      <div
+        *ngIf="getRole() === 'Consumer'"
+        role="button"
+        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
+        (click)="onCurrentOrderClick()"
+      >
+        <a class="a-card">
+          <span class="text-success h2">New / Current order</span>
+        </a>
       </div>
-      <div class="row">
-        <div role="button" class="border border-1 border-secondary rounded card m-3 p-2 shadow-lg">
-          <a class="a-card">
-            <span class="text-success h2">Add article</span>
-          </a>
-        </div>
+      <div
+        *ngIf="getRole() === 'Consumer'"
+        role="button"
+        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
+        (click)="onHistoryClick()"
+      >
+        <a class="a-card">
+          <span class="text-success h2">Ordering history</span>
+        </a>
+      </div>
+      <div
+        *ngIf="getRole() === 'Admin'"
+        role="button"
+        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
+        (click)="onPendingRequestsClick()"
+      >
+        <a class="a-card">
+          <span class="text-success h2">Pending requests</span>
+        </a>
       </div>
     </div>
-  <div class="col w-50 d-flex justify-content-end">
-    <img src="assets/images/signup.jpg" class="image-100"/>
+    <div class="row">
+      <div
+        *ngIf="getRole() === 'Deliverer'"
+        role="button"
+        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
+        (click)="onPendingOrdersClick()"
+      >
+        <a class="a-card">
+          <span class="text-success h2">Pending orders</span>
+        </a>
+      </div>
+      <div
+        *ngIf="getRole() === 'Deliverer'"
+        role="button"
+        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
+        (click)="onHistoryClick()"
+      >
+        <a class="a-card">
+          <span class="text-success h2">Delivery history</span>
+        </a>
+      </div>
+      <div
+        *ngIf="getRole() === 'Deliverer'"
+        role="button"
+        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
+        (click)="onCurrentOrderClick()"
+      >
+        <a class="a-card">
+          <span class="text-success h2">Current order</span>
+        </a>
+      </div>
+      <div
+        *ngIf="getRole() === 'Admin'"
+        role="button"
+        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
+        (click)="onAllOrdersClick()"
+      >
+        <a class="a-card">
+          <span class="text-success h2">All orders</span>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        *ngIf="getRole() === 'Admin'"
+        role="button"
+        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
+        (click)="onAddItemClick()"
+      >
+        <a class="a-card">
+          <span class="text-success h2">Add article</span>
+        </a>
+      </div>
+    </div>
   </div>
+  <div class="col w-75 d-flex justify-content-end">
+    <img src="assets/images/signup.jpg" class="image-50" />
   </div>
-
+</div>

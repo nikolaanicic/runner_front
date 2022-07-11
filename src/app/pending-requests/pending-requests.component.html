@@ -1,0 +1,59 @@
+<div
+  class="d-flex flex-column w-100 justify-content-center align-items-center font-monospace"
+>
+  <div
+    class="border rounded m-2 p-2 d-flex flex-row"
+    *ngFor="let req of pending"
+  >
+    <div class="d-flex flex-row justify-content-around">
+      <div class="m-2 p-2 profile-img-container">
+        <img
+          class="border"
+          [src]="createImagePath(req!.imagePath)"
+          style="height: 100%; width: 100%"
+          onerror="this.src='assets/images/login.jpg'"
+        />
+      </div>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="d-flex flex-row">
+        <div class="d-flex flex-column m-2 p-2 text-center">
+          <span class="text-black-50">Username</span>
+          <span class="text-warning">{{ req?.username }}</span>
+        </div>
+        <div class="d-flex flex-column m-2 p-2 text-center">
+          <span class="text-black-50">Full Name</span>
+          <span class="text-warning">{{ req?.name }} {{ req?.lastName }}</span>
+        </div>
+        <div class="d-flex flex-column m-2 p-2 text-center">
+          <span class="text-black-50">Date of birth</span>
+          <span class="text-warning">{{ req?.dateOfBirth | date }}</span>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="m-2 p-2">
+          <button
+            class="btn btn-success w-100 m-2 p-2"
+            (click)="onApproveClick(req.username)"
+          >
+            &#10003;
+          </button>
+        </div>
+        <div class="m-2 p-2">
+          <button
+            class="btn btn-danger w-100 m-2 p-2"
+            (click)="onRejectClick(req.username)"
+          >
+            &#10005;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="pending === undefined || pending.length === 0"
+    class="text-center m-2 p-2"
+  >
+    <label class="text-warning">Pending requests list is empty</label>
+  </div>
+</div>

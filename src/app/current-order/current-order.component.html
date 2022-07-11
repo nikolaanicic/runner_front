@@ -1,0 +1,93 @@
+<app-basket
+  *ngIf="mode === 'Consumer' && orderMode === 'Ordering'"
+></app-basket>
+<app-item-list
+  *ngIf="mode === 'Consumer' && orderMode === 'Ordering'"
+></app-item-list>
+
+<div
+  *ngIf="
+    mode === 'Deliverer' || (mode === 'Consumer' && orderMode === 'Viewing')
+  "
+  style="height: 85vh"
+  class="d-flex flex-row text-success font-monospace justify-content-around"
+>
+  <div class="d-flex flex-column w-25 m-2 p-2">
+    <h4 class="text-center">Items</h4>
+    <ul style="list-style: none">
+      <hr />
+
+      <li *ngFor="let item of order?.produce">
+        <div class="d-flex flex-row justify-content-between">
+          <label class="m-2 p-2">{{ item.name }}</label>
+          <label class="m-2 p-2">{{ item.price }} $</label>
+        </div>
+      </li>
+      <hr />
+      <div class="d-flex flex-row justify-content-between">
+        <label class="m-2 p-2">Total price:</label>
+        <label class="m-2 p-2">{{ order?.totalPrice }} $</label>
+      </div>
+    </ul>
+  </div>
+  <div class="d-flex flex-column text-success m-2 p-2 w-25">
+    <div class="w-100">
+      <h4 class="text-center">Information</h4>
+      <ul style="list-style: none">
+        <hr />
+        <li>
+          <div class="d-flex flex-row justify-content-between m-2">
+            <label class="m-2 p-2">Consumer</label>
+            <label class="m-2 p-2">{{ order?.consumer }}</label>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex flex-row justify-content-between m-2">
+            <label class="m-2 p-2">Address</label>
+            <label class="m-2 p-2">{{ order?.address }}</label>
+          </div>
+        </li>
+        <li class="m-2">
+          <div class="d-flex flex-row justify-content-between m-2">
+            <label class="m-2 p-2">{{ order?.comment }}</label>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="w-100 m-2">
+      <h4 class="text-center text-success">Timer</h4>
+      <hr />
+      <div
+        style="min-height: 100%; min-width: 100%"
+        class="border border-success text-center"
+      >
+        <label *ngIf="getRemainingTime() > 0" class="m-2 p-2"
+          >You won't be able to log out until the current delivery is
+          completed</label
+        >
+        <label *ngIf="getRemainingTime() > 0" class="h4">{{
+          getRemainingTime()
+        }}</label>
+        <label
+          *ngIf="getRemainingTime() <= 0 && mode === 'Deliverer'"
+          class="m-2 p-2"
+          >You have arrived at {{ order?.address }}</label
+        >
+        <label
+          *ngIf="getRemainingTime() <= 0 && mode === 'Consumer'"
+          class="m-2 p-2"
+          >Your order has arrived at {{ order?.address }}</label
+        >
+
+        <button
+          *ngIf="getRemainingTime() <= 0 && mode === 'Deliverer'"
+          type="button"
+          class="btn btn-danger m-2 p-2"
+          (click)="delvierOrderClicked()"
+        >
+          Deliver the order
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

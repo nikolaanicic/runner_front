@@ -1,0 +1,21 @@
+<div class="container w-100 font-monospace">
+  <app-order
+    *ngFor="let order of orders"
+    [order]="order"
+    [mode]="mode"
+    [acceptHandler]="acceptOrderHandler()"
+  ></app-order>
+  <div *ngIf="orders && orders.length === 0" class="m-2 p-2 text-center">
+    <div *ngSwitch="mode">
+      <span class="text-warning h2" *ngSwitchCase="'/history'"
+        ><label>History is empty</label></span
+      >
+      <span class="text-warning h2" *ngSwitchCase="'/pendingOrders'"
+        ><label>No new orders</label></span
+      >
+      <span class="text-warning h2" *ngSwitchCase="'/allOrders'"
+        ><label>No orders</label></span
+      >
+    </div>
+  </div>
+</div>

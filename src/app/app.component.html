@@ -1,1 +1,9 @@
+<div
+  class="text-success navbar sticky-top border-bottom border-success bg-dark"
+  style="z-index: 150"
+  *ngIf="isAuthenticated()"
+>
+  <app-pop-up-header></app-pop-up-header>
+</div>
+
 <router-outlet></router-outlet>
