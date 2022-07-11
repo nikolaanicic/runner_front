@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../services/login/login.service';
 import { NotificationService } from '../services/notification/notification.service';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private notify: NotificationService,
     private router: Router,
     private orderService: OrderService

@@ -99,5 +99,7 @@
       }
     }
   },
-  "defaultProject": "front_app"
+  "cli": {
+    "analytics": "ec7eb135-a214-435c-a0d1-14d95b916ac2"
+  }
 }

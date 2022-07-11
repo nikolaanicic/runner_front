@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Form, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from '../../models/user/UserData';
 import {
@@ -18,7 +18,7 @@ import { UserService } from '../services/user/user.service';
 })
 export class ProfileComponent implements OnInit {
   isEditing: boolean = false;
-  userUpdateForm: FormGroup = this.fb.group(this.createUpdateForm());
+  userUpdateForm: UntypedFormGroup = this.fb.group(this.createUpdateForm());
   user: UserData | null = null;
   newImage: File | null = null;
   imagePath: string | null = null;
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private notify: NotificationService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private update: UpdateUserService,
     private router: Router
   ) {}

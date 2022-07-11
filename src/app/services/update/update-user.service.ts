@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { catchError, throwError } from 'rxjs';
 import { UserData } from '../../../models/user/UserData';
 import {
@@ -36,7 +36,7 @@ export class UpdateUserService {
     return arr;
   }
 
-  private filterChanges(form: FormGroup, user: UserData | null) {
+  private filterChanges(form: UntypedFormGroup, user: UserData | null) {
     let fieldnames: string[] = new Array();
     let values = new Array();
     let ops: string[] = new Array();
@@ -80,7 +80,7 @@ export class UpdateUserService {
     return { names: fieldnames, values: values, ops: ops };
   }
 
-  updateUser(form: FormGroup, user: UserData | null) {
+  updateUser(form: UntypedFormGroup, user: UserData | null) {
     let vals = this.filterChanges(form, user);
     let patch = this.generateJsonPatch(vals.names, vals.values, vals.ops);
 

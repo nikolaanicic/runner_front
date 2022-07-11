@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { BasketService } from '../services/basket/basket.service';
 import { NotificationService } from '../services/notification/notification.service';
 import { OrderService } from '../services/order/order.service';
@@ -15,7 +15,7 @@ export class BasketComponent implements OnInit {
 
   constructor(
     private basket: BasketService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private orderService: OrderService,
     private notify: NotificationService
   ) {}

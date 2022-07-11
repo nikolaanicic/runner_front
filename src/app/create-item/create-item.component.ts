@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { validatePrice } from '../../models/validators/validatorFuncs';
 import { ItemsService } from '../services/items/items.service';
 import { NotificationService } from '../services/notification/notification.service';
@@ -12,7 +12,7 @@ import { NotificationService } from '../services/notification/notification.servi
 export class CreateItemComponent implements OnInit {
   itemForm = this.fb.group(this.createFormGroup());
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private itemsService: ItemsService,
     private notify: NotificationService
   ) {}

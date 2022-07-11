@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignUpDto } from '../../models/signup/SignUpDto';
 import {
@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
   signUpForm = this.fb.group(this.createFormObj());
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private signUp: SignupService,
     private router: Router,
     private notify: NotificationService
