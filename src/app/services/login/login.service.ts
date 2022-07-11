@@ -6,6 +6,7 @@ import { getHeaders, parseServerErrorResponse } from '../common/commonFunc';
 import { TokenResponse } from '../../../models/login/TokenResponse';
 import { RefreshDto } from '../../../models/login/RefreshDto';
 import {
+  FacebookLoginProvider,
   GoogleLoginProvider,
   SocialAuthService,
   SocialUser,
@@ -27,8 +28,8 @@ export class LoginService {
     });
   }
 
-  googleLogin = () => {
-    this.socialAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
+  facebookLogin = () => {
+    this.socialAuth.signIn(FacebookLoginProvider.PROVIDER_ID);
   };
 
   googleSignOut = () => {

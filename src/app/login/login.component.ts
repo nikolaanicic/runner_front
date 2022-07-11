@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   externalLogin = () => {
-    this.loginService.googleLogin();
+    this.loginService.facebookLogin();
   };
   onSubmit() {
     this.loginService.login(this.loginForm.value).subscribe({

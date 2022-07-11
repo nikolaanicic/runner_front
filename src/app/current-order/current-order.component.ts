@@ -58,8 +58,6 @@ export class CurrentOrderComponent implements OnInit {
         this.consumerInit();
         break;
     }
-
-    console.log(this.order);
   }
 
   delvierOrderClicked() {

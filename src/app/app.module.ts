@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,7 @@ import { AuthGuard } from './guards/auth.guard';
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
+  FacebookLoginProvider,
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
@@ -55,15 +56,13 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
   providers: [
     AuthGuard,
     {
-      provide: 'SocialLoginServiceConfig',
+      provide: 'SocialAuthServiceConfig',
       useValue: {
         autoLogin: false,
         providers: [
           {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '15548761236-hna1u9navqc3shldom215q3l8lacndmi.apps.googleusercontent.com'
-            ),
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('344760101015469'),
           },
         ],
         onError: (err) => console.log(err),

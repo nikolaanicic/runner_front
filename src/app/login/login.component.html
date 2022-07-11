@@ -57,9 +57,13 @@
           >
             <span>Login</span>
           </button>
-          <asl-google-signin-button>
-            <button>Sign in With Google</button>
-          </asl-google-signin-button>
+          <button
+            class="btn btn-primary m-2 p-2 w-25"
+            (click)="externalLogin()"
+            type="button"
+          >
+            Facebook Login
+          </button>
         </div>
         <span class="m-2 p-2 font-monospace"
           ><p class="text-secondary h6">
