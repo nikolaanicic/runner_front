@@ -21,16 +21,13 @@
     >
   </div>
   <div *ngIf="getRole() === 'Consumer'">
-    <a href="#" class="text-success">New / Current order</a>
+    <a (click)="Navigate('currentOrder')" role="button" class="text-success"
+      >New / Current order</a
+    >
   </div>
   <div *ngIf="getRole() === 'Consumer'">
     <a (click)="Navigate('history')" role="button" class="text-success"
       >Order history</a
-    >
-  </div>
-  <div *ngIf="getRole() === 'Deliverer'">
-    <a (click)="Navigate('currentOrder')" role="button" class="text-success"
-      >Current order</a
     >
   </div>
   <div *ngIf="getRole() === 'Deliverer'">

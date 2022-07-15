@@ -24,6 +24,7 @@ export class PopUpHeaderComponent implements OnInit {
   logoutClicked() {
     this.auth.logout();
     this.router.navigate(['/login']);
+    window.location.reload();
   }
 
   openNav() {

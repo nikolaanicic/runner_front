@@ -9,7 +9,7 @@
     margin-top: 2%;
   "
 >
-  <div *ngIf="!hasSubmitted" class="m-2">
+  <div class="m-2">
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="d-flex flex-column text-center">
         <div class="d-flex flex-column">

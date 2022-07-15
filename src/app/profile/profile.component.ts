@@ -1,5 +1,10 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
-import { Form, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  Form,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from '../../models/user/UserData';
 import {
@@ -27,8 +32,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private notify: NotificationService,
     private fb: UntypedFormBuilder,
-    private update: UpdateUserService,
-    private router: Router
+    private update: UpdateUserService
   ) {}
 
   ngOnInit(): void {
@@ -55,10 +59,12 @@ export class ProfileComponent implements OnInit {
   onSaveChangesClick() {}
 
   parseDate(dateString: Date | undefined) {
-    if (dateString)
-      return `${dateString.getFullYear()}-${
-        dateString.getMonth() + 1
-      }-${dateString.getDate()}`;
+    if (dateString) {
+      let month: number = dateString.getMonth() + 1;
+      let monthStr = month.toString();
+      if (month < 10) monthStr = `0${month}`;
+      return `${dateString.getFullYear()}-${monthStr}-${dateString.getDate()}`;
+    }
 
     return null;
   }
@@ -110,12 +116,8 @@ export class ProfileComponent implements OnInit {
 
     if (this.newImage !== null) {
       this.update.updateImage(this.newImage)?.subscribe({
-        next: () => {
+        next: (value) => {
           this.loadImage();
-          continueEdit2 = false;
-        },
-        error: (error) => {
-          this.notify.showNotification(error);
           continueEdit2 = false;
         },
       });

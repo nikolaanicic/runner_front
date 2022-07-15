@@ -69,16 +69,6 @@
         </a>
       </div>
       <div
-        *ngIf="getRole() === 'Deliverer'"
-        role="button"
-        class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"
-        (click)="onCurrentOrderClick()"
-      >
-        <a class="a-card">
-          <span class="text-success h2">Current order</span>
-        </a>
-      </div>
-      <div
         *ngIf="getRole() === 'Admin'"
         role="button"
         class="border border-1 border-secondary rounded card m-3 p-2 bg-dark"

@@ -3,6 +3,7 @@ import {
   Component,
   ContentChild,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -18,7 +19,7 @@ import { TimerService } from '../services/timer/timer.service';
   templateUrl: './current-order.component.html',
   styleUrls: ['./current-order.component.css'],
 })
-export class CurrentOrderComponent implements OnInit {
+export class CurrentOrderComponent implements OnInit, OnDestroy {
   constructor(
     private auth: LoginService,
     private orderService: OrderService,
@@ -39,12 +40,15 @@ export class CurrentOrderComponent implements OnInit {
     this.order = this.orderService.orderSubject.value;
   }
 
+  public ngOnDestroy(): void {}
+
   private consumerInit() {
     let order = this.orderService.orderSubject.value;
     if (order === undefined) this.orderMode = 'Ordering';
     else {
       this.order = order;
-      this.orderMode = 'Viewing';
+      if (this.timer.getTimeLeft() === 0) this.orderMode = 'Ordering';
+      else this.orderMode = 'Viewing';
     }
   }
 
@@ -67,6 +71,7 @@ export class CurrentOrderComponent implements OnInit {
         this.notify.showNotification(
           'You have successfully completed the order'
         );
+        this.orderService.removeData();
         this.router.navigate(['/pendingOrders']);
       },
       error: (error) => this.notify.showNotification(error),

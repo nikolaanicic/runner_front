@@ -94,22 +94,6 @@
       </div>
       <div class="d-flex flex-row justify-content-center m-3">
         <div class="d-flex flex-column">
-          <input
-            class="bg-dark border-secondary m-2 p-2 h5 text-secondary text-center"
-            [value]="user?.email"
-            formControlName="email"
-          />
-          <small
-            *ngIf="
-              userUpdateForm.controls.email.touched &&
-              (userUpdateForm.controls.email.errors?.required ||
-                userUpdateForm.controls.email.errors?.email)
-            "
-            class="text-danger"
-            >Email is invalid</small
-          >
-        </div>
-        <div class="d-flex flex-column">
           <div class="d-flex flex-row align-items-center justify-content-end">
             <input
               class="bg-dark border-secondary m-2 p-2 h5 text-secondary text-center"

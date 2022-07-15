@@ -1,40 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoginDto } from '../../../models/login/LoginDto';
-import { BehaviorSubject, catchError, of, throwError } from 'rxjs';
+import { catchError, ReplaySubject, throwError } from 'rxjs';
 import { getHeaders, parseServerErrorResponse } from '../common/commonFunc';
 import { TokenResponse } from '../../../models/login/TokenResponse';
 import { RefreshDto } from '../../../models/login/RefreshDto';
-import {
-  FacebookLoginProvider,
-  GoogleLoginProvider,
-  SocialAuthService,
-  SocialUser,
-} from '@abacritt/angularx-social-login';
-import { Subject } from '@microsoft/signalr';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   url: string = '/api/auth';
-  private extAuthChangeSub: BehaviorSubject<SocialUser> =
-    new BehaviorSubject<SocialUser>(new SocialUser());
-  private extAuthChanged = this.extAuthChangeSub.asObservable();
 
-  constructor(private http: HttpClient, private socialAuth: SocialAuthService) {
-    this.socialAuth.authState.subscribe((user) => {
-      this.extAuthChangeSub.next(user);
-    });
+  private userSubject = new ReplaySubject<gapi.auth2.GoogleUser | null>(1);
+
+  constructor(private http: HttpClient) {}
+
+  googleLogin(token: string) {
+    return this.http
+      .post<TokenResponse>(
+        this.url + '/googleLogin',
+        JSON.stringify({ idToken: token }),
+        { headers: getHeaders() }
+      )
+      .pipe(
+        catchError((err) => throwError(() => parseServerErrorResponse(err)))
+      );
   }
 
-  facebookLogin = () => {
-    this.socialAuth.signIn(FacebookLoginProvider.PROVIDER_ID);
-  };
-
-  googleSignOut = () => {
-    this.socialAuth.signOut();
-  };
+  observable() {
+    return this.userSubject.asObservable();
+  }
 
   login(dto: LoginDto) {
     return this.http
@@ -66,6 +62,7 @@ export class LoginService {
         catchError((error) => throwError(() => parseServerErrorResponse(error)))
       );
   }
+
   logout() {
     localStorage.clear();
   }

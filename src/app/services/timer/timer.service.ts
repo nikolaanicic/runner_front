@@ -5,7 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class TimerService {
   timer: any;
-  constructor() {}
+  constructor() {
+    let timer = sessionStorage.getItem('timer');
+    if (timer) {
+      this.clearTimerHandle();
+      this.startTimer()(timer as unknown as number);
+    }
+  }
 
   private intervalFunc = () => {
     let t: number = (sessionStorage.getItem('timer') as unknown as number) ?? 0;
@@ -32,7 +38,8 @@ export class TimerService {
   startTimer() {
     return (time: number) => {
       sessionStorage.setItem('timer', time.toString());
-      this.setTimerHandle(setInterval(this.intervalFunc, 1000));
+      if (!this.timer)
+        this.setTimerHandle(setInterval(this.intervalFunc, 1000));
     };
   }
 

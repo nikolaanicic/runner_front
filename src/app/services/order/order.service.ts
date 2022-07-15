@@ -42,6 +42,12 @@ export class OrderService {
     private router: Router
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    let order = sessionStorage.getItem('currentOrder');
+    if (order) this.setCurrentOrder(JSON.parse(order));
+  }
+
+  public removeData() {
+    sessionStorage.clear();
   }
 
   public addTimerPushDataListener = () => {
@@ -91,6 +97,7 @@ export class OrderService {
 
   setCurrentOrder = (order: Order | undefined) => {
     if (order) {
+      sessionStorage.setItem('currentOrder', JSON.stringify(order));
       this.orderSubject.next(order);
     }
   };
