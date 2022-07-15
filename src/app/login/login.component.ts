@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
   googleLogin = (token: string) => {
     this.loginService.googleLogin(token).subscribe({
       next: (value) => {
-        console.log(value);
         this.ngZone.run(() => {
           this.loginService.parseValidTokenResponse(value);
           this.router.navigate(['/dashboard']);
